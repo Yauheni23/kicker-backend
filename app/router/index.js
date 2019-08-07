@@ -1,6 +1,7 @@
 const initializeUserController = require('../controllers/user-controller');
 const initializeTeamController = require('../controllers/team-controller');
 const initializeGameController = require('../controllers/game-controller');
+const upload = require('../utils/upload');
 
 module.exports = (app) => {
   app.use((req, res, next) => {
@@ -13,4 +14,6 @@ module.exports = (app) => {
   initializeUserController(app);
   initializeTeamController(app);
   initializeGameController(app);
+
+  app.post('/image', upload)
 };

@@ -4,6 +4,8 @@ const app = express();
 const bodyParser = require('body-parser');
 app.use(bodyParser.json());
 
+app.use('/uploads', express.static('uploads'));
+
 require('./app/router')(app);
 
 app.listen(8080, () => {
