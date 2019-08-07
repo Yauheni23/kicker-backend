@@ -3,6 +3,7 @@ class UserMapper {
     return {
       id: user.id,
       name: user.name,
+      image: user.image,
       scope: user.scope,
       countGame: user.countGame,
       teams: user.teams.map(mapDatabaseTeams),
