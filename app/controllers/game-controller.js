@@ -1,5 +1,6 @@
 const GameService = require('../services/game-service');
 const UserService = require('../services/user-service');
+const Op = require('sequelize').Op;
 
 const gameService = new GameService();
 const userService = new UserService();
@@ -19,11 +20,17 @@ function getGames(request, response) {
 function createGame(request, response, next) {
   gameService.create(request.body)
     .then(() => next())
-    .catch(error => response.status(500).send(error));
+    .catch(error => response.status(400).send(error.errors[0]));
 }
 
 function addResultGame(request, response) {
-  userService.getById(request.body.users.map(user => ({ id: user.id })))
+  const filter = {
+    where: {
+      [Op.or]: [].concat(request.body.users.map(user => ({ id: user.id })))
+    }
+  };
+
+  userService.getAll(filter)
     .then(updateUsersScope)
     .then(result => {
       response.send(result);

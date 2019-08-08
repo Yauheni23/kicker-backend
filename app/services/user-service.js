@@ -12,9 +12,11 @@ class UserService {
       .then(users => users.map(this.userMapper.mapDatabaseToServiceModel));
   }
 
-  getById(usersId = []) {
-    return this.userRepository.getById(usersId)
-      .then(users => users.map(this.userMapper.mapDatabaseToServiceModel));
+  getById(id) {
+    return this.userRepository.getById(id)
+      .then(user => {
+        return this.userMapper.mapDatabaseToServiceModel(user)
+      });
   }
 
   create(data) {

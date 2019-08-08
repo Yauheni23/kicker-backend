@@ -1,4 +1,4 @@
-const Op = require('sequelize').Op;
+
 const User = require('../db/db.config.js').User;
 
 const defaultOptions = {
@@ -14,15 +14,11 @@ class UserRepository {
     });
   }
 
-  getById(usersId) {
-    const filter = {
+  getById(id) {
+    return User.findOne({
       where: {
-        [Op.or]: [].concat(usersId)
-      }
-    };
-
-    return User.findAll({
-      ...filter,
+        id: id
+      },
       ...defaultOptions
     });
   }
