@@ -24,11 +24,3 @@ class gameService {
 }
 
 module.exports = gameService;
-
-function validateUsers(users) {
-  return !users.some((user, index) => {
-    for (let i = 0; i < users.length && i !== index; i++) {
-      return user.id === users[i].id;
-    }
-  })
-}
