@@ -19,7 +19,14 @@ function getTeams(request, response) {
 
 function createTeam(request, response) {
   teamService.create(request.body)
-    .then(teams => response.send(teams))
+    .then(team => response.send({
+      id: team.id,
+      name: team.name,
+      image: team.image,
+      goals: 0,
+      games: [],
+      users: []
+    }))
     .catch(error => response.status(500).send(error));
 }
 

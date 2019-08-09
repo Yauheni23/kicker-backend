@@ -18,7 +18,15 @@ function getUsers(request, response) {
 
 function createUser(request, response) {
   userService.create(request.body)
-    .then(user => response.send(user))
+    .then(user => response.send({
+      id: user.id,
+      name: user.name,
+      image: user.image,
+      scope: user.scope,
+      countGame: user.scope,
+      teams: [],
+      games: []
+    }))
     .catch(error => response.status(500).send(error));
 }
 
