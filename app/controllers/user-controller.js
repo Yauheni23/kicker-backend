@@ -27,7 +27,7 @@ function createUser(request, response) {
       teams: [],
       games: []
     }))
-    .catch(error => response.status(500).send(error));
+    .catch(error => response.status(400).send(error.errors[0]));
 }
 
 function getUserById(request, response) {

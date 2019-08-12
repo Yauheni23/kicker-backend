@@ -27,7 +27,7 @@ function createTeam(request, response) {
       games: [],
       users: []
     }))
-    .catch(error => response.status(500).send(error));
+    .catch(error => response.status(400).send(error.errors[0]));
 }
 
 function addUser(request, response) {
