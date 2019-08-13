@@ -24,11 +24,9 @@ function createGame(request, response, next) {
 }
 
 function addResultGame(request, response) {
-  const filter = {
-    where: {
-      [Op.or]: [].concat(request.body.users.map(user => ({ id: user.id })))
-    }
-  };
+  const users = [request.body.team1.player1, request.body.team1.player2,
+    request.body.team2.player1, request.body.team2.player2];
+  const filter = filterUsers(users);
 
   userService.getAll(filter)
     .then(updateUsersScope)
@@ -37,11 +35,11 @@ function addResultGame(request, response) {
     })
     .catch(error => response.status(500).send(error));
 
-  function updateUsersScope(users) {
-    return Promise.all(users.map(user =>
+  function updateUsersScope(usersDatabase) {
+    return Promise.all(usersDatabase.map(user =>
       userService.update({
         countGame: user.countGame + 1,
-        scope: user.scope + request.body.users.find(el => el.id === user.id).goals
+        scope: user.scope + users.find(el => el.id === user.id).goals
       }, {
         where: {
           id: user.id
@@ -49,6 +47,14 @@ function addResultGame(request, response) {
       })
     ))
   }
+}
+
+function filterUsers(users) {
+  return {
+    where: {
+      [Op.or]: [].concat(users.map(user => ({ id: user.id })))
+    }
+  };
 }
 
 

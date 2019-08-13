@@ -1,24 +1,16 @@
-const env = require('./env.js');
-const searchParamsDb = require('../utils/searchParams');
-
 const Sequelize = require('sequelize');
-const sequelize = new Sequelize(
-  searchParamsDb('name'),
-  searchParamsDb('user'),
-  searchParamsDb('pass'),
-  {
-    host: searchParamsDb('host') || env.host,
-    dialect: env.dialect,
-    operatorsAliases: false,
-    logging: false,
-
-    pool: {
-      max: env.pool.max,
-      min: env.pool.min,
-      acquire: env.pool.acquire,
-      idle: env.pool.idle,
-    },
-  });
+const sequelize = new Sequelize({
+  username: process.env.DB_USER,
+  database: process.env.DB_NAME,
+  password: process.env.DB_PASS,
+  host: process.env.DB_HOST,
+  port: 5432,
+  ssl: true,
+  dialect: 'postgres',
+  dialectOptions: {
+    "ssl": { "require": true }
+  }
+});
 
 const db = {};
 

@@ -14,11 +14,11 @@ class gameService {
 
   create(data) {
     return this.gameRepository.create({
-      date: data.date,
-      team1Id: data.teams[0].id,
-      team2Id: data.teams[1].id,
-      goalsTeam1: data.teams[0].goals,
-      goalsTeam2: data.teams[1].goals,
+      date: new Date(),
+      team1Id: data.team1.id,
+      team2Id: data.team2.id,
+      goalsTeam1: data.team1.goals,
+      goalsTeam2: data.team2.goals,
     })
   }
 }
