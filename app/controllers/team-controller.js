@@ -2,13 +2,16 @@ const TeamService = require('../services/team-service');
 
 const teamService = new TeamService();
 
-module.exports = function(app) {
+module.exports = function (app) {
   app.route('/team')
     .get(getTeams)
     .post(createTeam);
 
   app.route('/team/user')
     .post(addUser);
+
+  app.route('/team/:id')
+    .get(getTeamById)
 };
 
 function getTeams(request, response) {
@@ -33,5 +36,11 @@ function createTeam(request, response) {
 function addUser(request, response) {
   teamService.addUser(request.body)
     .then(teams => response.send(teams))
+    .catch(error => response.status(500).send(error));
+}
+
+function getTeamById(request, response) {
+  teamService.getById(request.params.id)
+    .then(user => response.send(user))
     .catch(error => response.status(500).send(error));
 }

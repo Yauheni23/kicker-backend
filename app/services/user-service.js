@@ -1,6 +1,8 @@
 const UserRepository = require('../repositories/user-repository');
 const UserMapper = require('../mappers/user-mapper');
 
+const defaultUserImage = 'http://172.18.144.38:8080/uploads/defaultUser.svg';
+
 class UserService {
   constructor() {
     this.userRepository = new UserRepository();
@@ -22,7 +24,7 @@ class UserService {
   create(data) {
     return this.userRepository.create({
       name: data.name,
-      image: data.image
+      image: data.image || defaultUserImage
     })
   }
 
