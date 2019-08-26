@@ -18,9 +18,11 @@ class TeamRepository {
 
   getById(id) {
     return Team.findOne({
+      ...defaultOptions,
       where: {
-        id: id
-      }, ...defaultOptions
+        id: id,
+        is_tournament_team: false
+      },
     });
   }
 
