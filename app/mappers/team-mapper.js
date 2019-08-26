@@ -5,8 +5,11 @@ class TeamMapper {
       name: team.name,
       image: team.image,
       users: team.users.map(mapDatabaseUsers),
-      goals: reduceCountGoals(team.id, team.games1.concat(team.games2)),
-      games: team.games1.concat(team.games2).map(mapDatabaseGames),
+      games: team.games.map(game => ({
+        id: game.id,
+        date: game.date,
+        goals: game.teamGame.goals
+      })),
     };
   }
 }

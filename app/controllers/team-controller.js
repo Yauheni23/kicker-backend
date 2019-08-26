@@ -26,7 +26,6 @@ function createTeam(request, response) {
       id: team.id,
       name: team.name,
       image: team.image,
-      goals: 0,
       games: [],
       users: []
     }))

@@ -24,7 +24,8 @@ class TeamService {
   create(data) {
     return this.teamRepository.create({
       name: data.name,
-      image: data.image || defaultTeamImage
+      image: data.image || defaultTeamImage,
+      is_tournament_team: data.is_tournament_team
     })
   }
 

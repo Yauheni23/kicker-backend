@@ -15,14 +15,6 @@ module.exports = (sequelize, Sequelize) => {
         image: {
             type: Sequelize.STRING,
             allowNull: false
-        },
-        scope: {
-            type: Sequelize.INTEGER,
-            defaultValue: 0
-        },
-        countGame: {
-            type: Sequelize.INTEGER,
-            defaultValue: 0
         }
     });
 };

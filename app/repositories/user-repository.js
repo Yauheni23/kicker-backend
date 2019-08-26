@@ -1,9 +1,10 @@
-
 const User = require('../db/db.config.js').User;
 
 const defaultOptions = {
-  include: ['teams'],
-  attributes: ['id', 'name', 'image', 'scope', 'countGame']
+  include: ['teams', {
+    association: 'games'
+  }],
+  attributes: ['id', 'name', 'image']
 };
 
 class UserRepository {

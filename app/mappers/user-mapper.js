@@ -4,9 +4,12 @@ class UserMapper {
       id: user.id,
       name: user.name,
       image: user.image,
-      scope: user.scope,
-      countGame: user.countGame,
       teams: user.teams.map(mapDatabaseTeams),
+      games: user.games.filter(game => game.completed).map(game => ({
+        id: game.id,
+        date: game.date,
+        goals: game.gameUser.goals
+      }))
     };
   }
 }

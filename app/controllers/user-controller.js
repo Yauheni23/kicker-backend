@@ -22,8 +22,6 @@ function createUser(request, response) {
       id: user.id,
       name: user.name,
       image: user.image,
-      scope: user.scope,
-      countGame: user.scope,
       teams: [],
       games: []
     }))

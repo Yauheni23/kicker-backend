@@ -1,13 +1,14 @@
 const Team = require('../db/db.config.js').Team;
-const TeamPlayer = require('../db/db.config.js').TeamPlayer;
 
 const defaultOptions = {
   include: [
-    { association: 'users', attributes: ['id', 'name', 'image', 'scope', 'countGame'] },
-    { association: 'games1', attributes: ['id', 'date', 'goalsTeam1', 'goalsTeam2'], include: ['team1', 'team2'] },
-    { association: 'games2', attributes: ['id', 'date', 'goalsTeam1', 'goalsTeam2'], include: ['team1', 'team2'] },
+    {association: 'users', attributes: ['id', 'name', 'image']},
+    {association: 'games', attributes: ['id', 'date']},
   ],
-  attributes: ['id', 'name', 'image']
+  attributes: ['id', 'name', 'image'],
+  where: {
+    is_tournament_team: false
+  }
 };
 
 class TeamRepository {
@@ -28,7 +29,11 @@ class TeamRepository {
   }
 
   addUser(data) {
-    return TeamPlayer.create(data);
+    return Team.findOne({
+      where: {
+        id: data.teamId
+      }
+    }).then(team => team.addUser(data.userId));
   }
 }
 

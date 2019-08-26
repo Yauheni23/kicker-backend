@@ -15,11 +15,21 @@ class gameService {
   create(data) {
     return this.gameRepository.create({
       date: new Date(),
-      team1Id: data.team1.id,
-      team2Id: data.team2.id,
-      goalsTeam1: data.team1.goals,
-      goalsTeam2: data.team2.goals,
-    })
+      tournamentId: data.tournamentId,
+      completed: data.completed
+    }).then(game => Promise.all(data.teams.map(team => this.gameRepository.createTeamGame({
+      teamId: team.id,
+      gameId: game.id,
+      goals: team.goals
+    }))))
+      .then(teamsGame => Promise.all(data.teams.reduce((accumulator, currentValue, index) => {
+        return accumulator.concat(currentValue.players.map(player => this.gameRepository.createGameUser({
+          userId: player.id,
+          goals: player.goals,
+          gameId: teamsGame[index].gameId,
+          teamId: currentValue.id
+        })))
+      }, [])))
   }
 }
 

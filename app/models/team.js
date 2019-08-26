@@ -4,7 +4,6 @@ module.exports = (sequelize, Sequelize) => {
     return sequelize.define(TEAM, {
         name: {
             type: Sequelize.STRING,
-            unique: true,
             validate: {
                 min: {
                     args: [2],
@@ -15,6 +14,10 @@ module.exports = (sequelize, Sequelize) => {
         image: {
             type: Sequelize.STRING,
             allowNull: false
+        },
+        is_tournament_team: {
+            type: Sequelize.BOOLEAN,
+            defaultValue: false
         }
     });
 };
