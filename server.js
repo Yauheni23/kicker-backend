@@ -9,7 +9,7 @@ app.use('/uploads', express.static('uploads'));
 
 require('./app/router')(app);
 
-app.listen(8080, () => {
+app.listen(process.env.PORT || 80, () => {
     console.log('App listening on port 8080!');
 });
 //
