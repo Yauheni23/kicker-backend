@@ -63,11 +63,14 @@ function upload(request, response) {
 
     if (saveToPath) {
       return fs.unlink(saveToPath, (err) => {
-        return response.status(500).send(err);
+        return response.status(400).send({
+          ...err,
+          message: 'Save to path'
+        });
       });
     }
 
-    return response.status(500).send(error);
+    return response.status(400).send(error);
   }
 }
 
