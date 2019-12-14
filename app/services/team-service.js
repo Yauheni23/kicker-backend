@@ -1,7 +1,7 @@
 const TeamRepository = require('../repositories/team-repository');
 const TeamMapper = require('../mappers/team-mapper');
 
-const defaultTeamImage = 'http://172.18.144.38:8080/uploads/defaultTeam.svg';
+const defaultTeamImage = 'https://myimagesforcoursework.s3.eu-central-1.amazonaws.com/image/team.png';
 
 class TeamService {
   constructor() {

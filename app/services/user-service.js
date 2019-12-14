@@ -1,7 +1,7 @@
 const UserRepository = require('../repositories/user-repository');
 const UserMapper = require('../mappers/user-mapper');
 
-const defaultUserImage = 'http://172.18.144.38:8080/uploads/defaultUser.svg';
+const defaultUserImage = 'https://myimagesforcoursework.s3.eu-central-1.amazonaws.com/image/boy.png';
 
 class UserService {
   constructor() {

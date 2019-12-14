@@ -9,7 +9,8 @@ module.exports = (sequelize, Sequelize) => {
                     args: [2],
                     msg: 'Name is too short'
                 }
-            }
+            },
+            unique: true,
         },
         image: {
             type: Sequelize.STRING,
