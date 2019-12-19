@@ -19,6 +19,7 @@ db.Sequelize = Sequelize;
 db.sequelize = sequelize;
 
 db.Game = require('../models/game')(sequelize, Sequelize);
+db.Admin = require('../models/admin')(sequelize, Sequelize);
 db.User = require('../models/user')(sequelize, Sequelize);
 db.Team = require('../models/team')(sequelize, Sequelize);
 db.Tournament = require('../models/tournament')(sequelize, Sequelize);
