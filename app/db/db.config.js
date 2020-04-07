@@ -1,9 +1,9 @@
 const Sequelize = require('sequelize');
 const sequelize = new Sequelize({
-  username: process.argv[2] === 'test' ? process.env.DB_USER_TEST : process.env.DB_USER,
-  database: process.argv[2] === 'test' ? process.env.DB_NAME_TEST : process.env.DB_NAME,
-  password: process.argv[2] === 'test' ? process.env.DB_PASS_TEST : process.env.DB_PASS,
-  host: process.argv[2] === 'test' ? process.env.DB_HOST_TEST : process.env.DB_HOST,
+  username: process.env.DB_USER,
+  database: process.env.DB_NAME,
+  password: process.env.DB_PASS,
+  host: process.env.DB_HOST,
   logging: false,
   port: 5432,
   ssl: true,
