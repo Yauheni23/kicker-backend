@@ -1,9 +1,11 @@
+const isDevMode = process.argv[2] === 'dev';
+const prefixEnv = isDevMode ? 'DEV_' : '';
 const Sequelize = require('sequelize');
 const sequelize = new Sequelize({
-  username: process.env.DB_USER,
-  database: process.env.DB_NAME,
-  password: process.env.DB_PASS,
-  host: process.env.DB_HOST,
+  username: process.env[`${prefixEnv}DB_USER`],
+  database: process.env[`${prefixEnv}DB_NAME`],
+  password: process.env[`${prefixEnv}DB_PASS`],
+  host: process.env[`${prefixEnv}DB_HOST`],
   logging: false,
   port: 5432,
   ssl: true,
@@ -19,7 +21,6 @@ db.Sequelize = Sequelize;
 db.sequelize = sequelize;
 
 db.Game = require('../models/game')(sequelize, Sequelize);
-db.Admin = require('../models/admin')(sequelize, Sequelize);
 db.User = require('../models/user')(sequelize, Sequelize);
 db.Team = require('../models/team')(sequelize, Sequelize);
 db.Tournament = require('../models/tournament')(sequelize, Sequelize);

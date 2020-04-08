@@ -4,10 +4,17 @@ const defaultOptions = {
   include: ['teams', {
     association: 'games'
   }],
-  attributes: ['id', 'name', 'image']
+  attributes: ['id', 'name', 'image', 'mail', 'password']
 };
 
 class UserRepository {
+  getOne(filter) {
+    return User.findOne({
+      ...filter,
+      ...defaultOptions
+    });
+  }
+
   getAll(filter) {
     return User.findAll({
       ...filter,

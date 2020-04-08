@@ -4,6 +4,7 @@ class UserMapper {
       id: user.id,
       name: user.name,
       image: user.image,
+      mail: user.mail,
       teams: user.teams.map(mapDatabaseTeams),
       games: user.games.filter(game => game.completed).map(game => ({
         id: game.id,

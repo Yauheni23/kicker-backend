@@ -9,11 +9,7 @@ class gameService {
 
   getAll() {
     return this.gameRepository.getAll()
-      .then(games => {
-        console.log(games.map(this.gameMapper.mapDatabaseToServiceModel));
-
-        return games.map(this.gameMapper.mapDatabaseToServiceModel)
-      });
+      .then(games => games.map(this.gameMapper.mapDatabaseToServiceModel));
   }
 
   create(data) {
