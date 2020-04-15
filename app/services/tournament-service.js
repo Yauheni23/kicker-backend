@@ -35,7 +35,6 @@ class TournamentService {
       this.teamService.create({
         name: team.name,
         image: team.image,
-        is_tournament_team: true
       })));
 
     teams.forEach(team => {

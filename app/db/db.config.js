@@ -94,4 +94,7 @@ db.Team.hasMany(db.GameUser, {foreignKey: 'teamId', as: 'players'});
 db.Game.belongsTo(db.Tournament, {as: 'tournament'});
 db.Tournament.hasMany(db.Game, {foreignKey: 'tournamentId', as: 'games'});
 
+db.Team.belongsTo(db.User, {as: 'captain'});
+db.User.hasMany(db.Team, {foreignKey: 'captainId', as: 'myTeam'});
+
 module.exports = db;

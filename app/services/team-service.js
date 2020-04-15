@@ -9,8 +9,8 @@ class TeamService {
     this.teamMapper = new TeamMapper();
   }
 
-  getAll() {
-    return this.teamRepository.getAll()
+  getAll(options = {}) {
+    return this.teamRepository.getAll(options)
       .then(teams => teams.map(this.teamMapper.mapDatabaseToServiceModel));
   }
 
@@ -25,7 +25,7 @@ class TeamService {
     return this.teamRepository.create({
       name: data.name,
       image: data.image || defaultTeamImage,
-      is_tournament_team: data.is_tournament_team
+      captainId: data.captainId
     })
   }
 

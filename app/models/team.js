@@ -15,10 +15,6 @@ module.exports = (sequelize, Sequelize) => {
         image: {
             type: Sequelize.STRING,
             allowNull: false
-        },
-        is_tournament_team: {
-            type: Sequelize.BOOLEAN,
-            defaultValue: false
         }
     });
 };

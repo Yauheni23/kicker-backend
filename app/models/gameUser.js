@@ -13,6 +13,10 @@ module.exports = (sequelize, Sequelize) => {
     },
     goals: {
       type: Sequelize.INTEGER,
+    },
+    isConfirmed: {
+      type: Sequelize.BOOLEAN,
+      defaultValue: false,
     }
   });
 };

@@ -5,15 +5,15 @@ const defaultOptions = {
     {association: 'users', attributes: ['id', 'name', 'image']},
     {association: 'games', attributes: ['id', 'date']},
   ],
-  attributes: ['id', 'name', 'image'],
-  where: {
-    is_tournament_team: false
-  }
+  attributes: ['id', 'name', 'image', 'captainId'],
 };
 
 class TeamRepository {
-  getAll() {
-    return Team.findAll(defaultOptions);
+  getAll(options = {}) {
+    return Team.findAll({
+      ...defaultOptions,
+      ...options,
+    });
   }
 
   getById(id) {
@@ -21,7 +21,6 @@ class TeamRepository {
       ...defaultOptions,
       where: {
         id: id,
-        is_tournament_team: false
       },
     });
   }
