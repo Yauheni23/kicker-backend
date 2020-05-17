@@ -3,14 +3,20 @@ const GAME = 'game';
 module.exports = (sequelize, Sequelize) => {
     return sequelize.define(GAME, {
         date: {
-            type: Sequelize.DATE
+            type: Sequelize.DATE,
         },
-        tournamentId: {
+        confirmed: {
+            type: Sequelize.BOOLEAN,
+            defaultValue: false,
+        },
+        winTeamId: {
             type: Sequelize.INTEGER,
         },
-        completed: {
-            type: Sequelize.BOOLEAN,
-            defaultValue: true
+        winPlayer1Id: {
+            type: Sequelize.INTEGER,
+        },
+        winPlayer2Id: {
+            type: Sequelize.INTEGER,
         }
     });
 };

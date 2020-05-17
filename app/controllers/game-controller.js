@@ -9,7 +9,7 @@ module.exports = function(app) {
 };
 
 function getGames(request, response) {
-  gameService.getAll()
+  gameService.getAll(request.query)
     .then(games => response.send(games))
     .catch(error => response.status(500).send(error));
 }

@@ -1,14 +1,7 @@
-const USER = 'user';
+const SPACE = 'spaces';
 
 module.exports = (sequelize, Sequelize) => {
-    return sequelize.define(USER, {
-        mail: {
-            type: Sequelize.STRING,
-            validate: {
-                isEmail: true
-            },
-            unique: true
-        },
+    return sequelize.define(SPACE, {
         name: {
             type: Sequelize.STRING,
             validate: {
@@ -23,13 +16,5 @@ module.exports = (sequelize, Sequelize) => {
             type: Sequelize.STRING,
             allowNull: false
         },
-        password: {
-            type: Sequelize.STRING,
-            allowNull: false
-        },
-        confirmedKey: {
-            type: Sequelize.STRING,
-            allowNull: true
-        }
     });
 };

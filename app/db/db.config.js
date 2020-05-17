@@ -23,9 +23,10 @@ db.sequelize = sequelize;
 db.Game = require('../models/game')(sequelize, Sequelize);
 db.User = require('../models/user')(sequelize, Sequelize);
 db.Team = require('../models/team')(sequelize, Sequelize);
-db.Tournament = require('../models/tournament')(sequelize, Sequelize);
+db.Space = require('../models/space')(sequelize, Sequelize);
 db.TeamGame = require('../models/teamGame')(sequelize, Sequelize);
 db.GameUser = require('../models/gameUser')(sequelize, Sequelize);
+db.UserSpace = require('../models/userSpace')(sequelize, Sequelize);
 
 db.Team.belongsToMany(db.User, {
   through: 'teamPlayer',
@@ -40,25 +41,6 @@ db.User.belongsToMany(db.Team, {
   otherKey: 'teamId'
 });
 
-
-
-db.Tournament.belongsToMany(db.Team, {
-  through: 'teamTournament',
-  as: 'teams',
-  foreignKey: 'tournamentId',
-  otherKey: 'teamId'
-});
-
-db.Team.belongsToMany(db.Tournament, {
-  through: 'teamTournament',
-  as: 'tournament',
-  foreignKey: 'teamId',
-  otherKey: 'tournamentId'
-});
-
-
-
-
 db.Game.belongsToMany(db.Team, {
   through: 'teamGame',
   as: 'teams',
@@ -72,8 +54,6 @@ db.Team.belongsToMany(db.Game, {
   foreignKey: 'teamId',
   otherKey: 'gameId'
 });
-
-
 
 db.Game.belongsToMany(db.User, {
   through: 'gameUser',
@@ -91,10 +71,41 @@ db.User.belongsToMany(db.Game, {
 db.GameUser.belongsTo(db.Team, {as: 'team'});
 db.Team.hasMany(db.GameUser, {foreignKey: 'teamId', as: 'players'});
 
-db.Game.belongsTo(db.Tournament, {as: 'tournament'});
-db.Tournament.hasMany(db.Game, {foreignKey: 'tournamentId', as: 'games'});
-
 db.Team.belongsTo(db.User, {as: 'captain'});
 db.User.hasMany(db.Team, {foreignKey: 'captainId', as: 'myTeam'});
+
+db.Space.belongsToMany(db.User, {
+  through: 'userSpace',
+  as: 'players',
+  foreignKey: 'spaceId',
+  otherKey: 'userId'
+});
+
+db.User.belongsToMany(db.Space, {
+  through: 'userSpace',
+  as: 'userSpaces',
+  foreignKey: 'spaceId',
+  otherKey: 'userId'
+});
+
+db.Space.belongsToMany(db.User, {
+  through: 'adminSpace',
+  as: 'admins',
+  foreignKey: 'spaceId',
+  otherKey: 'userId'
+});
+
+db.User.belongsToMany(db.Space, {
+  through: 'adminSpace',
+  as: 'adminSpaces',
+  foreignKey: 'spaceId',
+  otherKey: 'userId'
+});
+
+db.Game.belongsTo(db.Space, {as: 'space'});
+db.Space.hasMany(db.Game, {foreignKey: 'spaceId', as: 'games'});
+
+db.Team.belongsTo(db.Space, {as: 'space'});
+db.Space.hasMany(db.Team, {foreignKey: 'spaceId', as: 'teams'});
 
 module.exports = db;

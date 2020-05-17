@@ -10,10 +10,7 @@ class GameRepository {
         association: 'teams'
       }, {
         association: 'players'
-      }],
-      where: {
-        completed: true
-      }
+      }]
     });
   }
 

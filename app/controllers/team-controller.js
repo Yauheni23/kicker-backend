@@ -11,10 +11,22 @@ module.exports = function (app) {
         .post(addUser);
 
     app.route('/team/:id')
-        .get(getTeamById);
+        .get(getTeamById)
+        .put(updateTeam);
     app.route('/teamsUser/:id')
         .get(getTeamsUser);
 };
+
+function updateTeam (request, response) {
+    teamService.update(request.body, {
+        where: {
+            id: request.params.id
+        }
+    })
+        .then(user => response.send(user))
+        .catch(error => response.status(500)
+            .send(error));
+}
 
 function getTeams (request, response) {
     teamService.getAll()

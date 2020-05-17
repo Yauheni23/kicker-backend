@@ -35,6 +35,11 @@ class TeamService {
       userId: data.userId,
     })
   }
+  async update ({image}, options) {
+    return this.teamRepository.update({
+      image,
+    }, options);
+  }
 }
 
 module.exports = TeamService;

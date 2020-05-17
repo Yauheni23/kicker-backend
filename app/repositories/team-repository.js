@@ -36,6 +36,10 @@ class TeamRepository {
       }
     }).then(team => team.addUser(data.userId));
   }
+
+  update(data, options) {
+    return Team.update(data, options);
+  }
 }
 
 module.exports = TeamRepository;
