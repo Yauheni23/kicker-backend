@@ -8,21 +8,18 @@ module.exports = function (app) {
     app.route('/register')
         .post(register);
     app.route('/user')
-        .get(getUsers)
-        .post(createUser);
+        .get(getUsers);
     app.route('/user/:id')
         .get(getUserById)
         .put(updateUser);
 };
 
 function login (request, response) {
-    userService.login(request.body)
-        .then(user => response.send(user));
+    userService.login(request.body).then(user => response.send(user));
 }
 
 function register (request, response) {
-    userService.register(request.body)
-        .then(user => response.send(user));
+    userService.register(request.body).then(user => response.send(user));
 }
 
 function getUsers (request, response) {
@@ -30,15 +27,6 @@ function getUsers (request, response) {
         .then(users => response.send(users))
         .catch(error => response.status(500)
             .send(error));
-}
-
-function createUser (request, response) {
-    userService.create(request.body)
-        .then(user => response.send({
-            id: user.id, name: user.name, image: user.image, teams: [], games: []
-        }))
-        .catch(error => response.status(400)
-            .send(error.errors[0]));
 }
 
 function getUserById (request, response) {
@@ -49,11 +37,7 @@ function getUserById (request, response) {
 }
 
 function updateUser (request, response) {
-    userService.update(request.body, {
-        where: {
-            id: request.params.id
-        }
-    })
+    userService.update(request.body, {where: {id: request.params.id}})
         .then(user => response.send(user))
         .catch(error => response.status(500)
             .send(error));

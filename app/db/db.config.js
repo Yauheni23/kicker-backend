@@ -27,43 +27,54 @@ db.Space = require('../models/space')(sequelize, Sequelize);
 db.TeamGame = require('../models/teamGame')(sequelize, Sequelize);
 db.GameUser = require('../models/gameUser')(sequelize, Sequelize);
 db.UserSpace = require('../models/userSpace')(sequelize, Sequelize);
+db.Call = require('../models/call')(sequelize, Sequelize);
+db.Status = require('../models/status')(sequelize, Sequelize);
+
+db.Status.belongsToMany(db.Call, { through: 'call_status', foreignKey: 'statusId', otherKey: 'callId'});
+db.Call.belongsToMany(db.Status, { through: 'call_status', foreignKey: 'callId', otherKey: 'statusId'});
+
+db.Call.belongsTo(db.Team, {as: 'creator'});
+db.Team.hasMany(db.Call, {foreignKey: 'creatorId', as: 'yourCalls'});
+
+db.Call.belongsTo(db.Team, {as: 'opponent'});
+db.Team.hasMany(db.Call, {foreignKey: 'opponentId', as: 'calls'});
 
 db.Team.belongsToMany(db.User, {
-  through: 'teamPlayer',
+  through: 'teamPlayers',
   as: 'users',
   foreignKey: 'teamId',
   otherKey: 'userId'
 });
 
 db.User.belongsToMany(db.Team, {
-  through: 'teamPlayer',
+  through: 'teamPlayers',
   foreignKey: 'userId',
   otherKey: 'teamId'
 });
 
 db.Game.belongsToMany(db.Team, {
-  through: 'teamGame',
+  through: 'teamGames',
   as: 'teams',
   foreignKey: 'gameId',
   otherKey: 'teamId'
 });
 
 db.Team.belongsToMany(db.Game, {
-  through: 'teamGame',
+  through: 'teamGames',
   as: 'games',
   foreignKey: 'teamId',
   otherKey: 'gameId'
 });
 
 db.Game.belongsToMany(db.User, {
-  through: 'gameUser',
+  through: 'gameUsers',
   as: 'players',
   foreignKey: 'gameId',
   otherKey: 'userId'
 });
 
 db.User.belongsToMany(db.Game, {
-  through: 'gameUser',
+  through: 'gameUsers',
   foreignKey: 'userId',
   otherKey: 'gameId'
 });
@@ -75,29 +86,29 @@ db.Team.belongsTo(db.User, {as: 'captain'});
 db.User.hasMany(db.Team, {foreignKey: 'captainId', as: 'myTeam'});
 
 db.Space.belongsToMany(db.User, {
-  through: 'userSpace',
-  as: 'players',
+  through: 'userSpaces',
+  as: 'space',
   foreignKey: 'spaceId',
   otherKey: 'userId'
 });
 
 db.User.belongsToMany(db.Space, {
-  through: 'userSpace',
-  as: 'userSpaces',
+  through: 'userSpaces',
+  as: 'space',
   foreignKey: 'spaceId',
   otherKey: 'userId'
 });
 
 db.Space.belongsToMany(db.User, {
-  through: 'adminSpace',
+  through: 'adminSpaces',
   as: 'admins',
   foreignKey: 'spaceId',
   otherKey: 'userId'
 });
 
 db.User.belongsToMany(db.Space, {
-  through: 'adminSpace',
-  as: 'adminSpaces',
+  through: 'adminSpaces',
+  as: 'yourSpace',
   foreignKey: 'spaceId',
   otherKey: 'userId'
 });

@@ -1,4 +1,4 @@
-const TEAM = 'team';
+const TEAM = 'teams';
 
 module.exports = (sequelize, Sequelize) => {
     return sequelize.define(TEAM, {

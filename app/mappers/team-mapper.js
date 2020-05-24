@@ -4,7 +4,7 @@ class TeamMapper {
       id: team.id,
       name: team.name,
       image: team.image,
-      users: team.users.map(mapDatabaseUsers),
+      users: team.users.map(TeamMapper.mapDatabaseUsers),
       captainId: team.captainId,
       games: team.games.map(game => ({
         id: game.id,
@@ -13,15 +13,15 @@ class TeamMapper {
       })),
     };
   }
-}
 
-function mapDatabaseUsers(user) {
-  return {
-    id: user.id,
-    name: user.name,
-    image: user.image,
-    scope: user.scope,
-    countGame: user.countGame
+  static mapDatabaseUsers(user) {
+    return {
+      id: user.id,
+      name: user.name,
+      image: user.image,
+      scope: user.scope,
+      countGame: user.countGame
+    }
   }
 }
 

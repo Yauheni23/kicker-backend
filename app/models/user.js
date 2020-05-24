@@ -1,4 +1,4 @@
-const USER = 'user';
+const USER = 'users';
 
 module.exports = (sequelize, Sequelize) => {
     return sequelize.define(USER, {

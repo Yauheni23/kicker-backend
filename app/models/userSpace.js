@@ -1,4 +1,4 @@
-const USER_SPACE = 'userSpace';
+const USER_SPACE = 'userSpaces';
 
 module.exports = (sequelize, Sequelize) => {
   return sequelize.define(USER_SPACE, {

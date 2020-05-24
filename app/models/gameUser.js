@@ -1,4 +1,4 @@
-const GAME_USER = 'gameUser';
+const GAME_USER = 'gameUsers';
 
 module.exports = (sequelize, Sequelize) => {
   return sequelize.define(GAME_USER, {

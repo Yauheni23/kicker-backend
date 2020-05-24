@@ -1,29 +1,22 @@
-const User = require('../db/db.config.js').User;
+const {Call} = require('../db/db.config.js');
 
 const defaultOptions = {
-  include: ['teams', {
+  include: ['statuses', {
     association: 'games'
   }],
   attributes: ['id', 'name', 'image', 'mail', 'password']
 };
 
-class UserRepository {
-  getOne(filter) {
-    return User.findOne({
-      ...filter,
-      ...defaultOptions
-    });
-  }
-
+class CallRepository {
   getAll(filter) {
-    return User.findAll({
+    return Call.findAll({
       ...filter,
       ...defaultOptions
     });
   }
 
   getById(id) {
-    return User.findOne({
+    return Call.findOne({
       where: {
         id
       },
@@ -36,8 +29,8 @@ class UserRepository {
   }
 
   update(data, options) {
-    return User.update(data, options);
+    return Call.update(data, options);
   }
 }
 
-module.exports = UserRepository;
+module.exports = CallRepository;
