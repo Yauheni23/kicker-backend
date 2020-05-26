@@ -1,4 +1,4 @@
-import nodemailer from 'nodemailer';
+const nodemailer = require('nodemailer');
 
 const transporter = nodemailer.createTransport({
     service: 'gmail',
@@ -16,10 +16,10 @@ async function callTeam(email, id, opponentId, date) {
         html: `
       <h2>Кикер - система вызовов</h2>
       <p>Время проведения ${date}</p>
-      <p><a href='https://kicker-front.herokuap.com/team/${id}'>Вашей команде бросили вызов</a></p>
-      <p><a href='https://kicker-front.herokuap.com/team/${opponentId}'>Ваш оппонент</a></p>
+      <p><a href="https://kicker-front.herokuapp.com/team/${id}" target="_blank">Вашей команде бросили вызов</a></p>
+      <p><a href="https://kicker-front.herokuapp.com/team/${opponentId}" target="_blank">Ваш оппонент</a></p>
     `
     });
 }
 
-export default callTeam;
+module.exports = callTeam;

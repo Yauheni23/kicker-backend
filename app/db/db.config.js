@@ -30,8 +30,8 @@ db.UserSpace = require('../models/userSpace')(sequelize, Sequelize);
 db.Call = require('../models/call')(sequelize, Sequelize);
 db.Status = require('../models/status')(sequelize, Sequelize);
 
-db.Status.belongsToMany(db.Call, { through: 'call_status', foreignKey: 'statusId', otherKey: 'callId'});
-db.Call.belongsToMany(db.Status, { through: 'call_status', foreignKey: 'callId', otherKey: 'statusId'});
+db.Status.belongsToMany(db.Call, { through: 'callStatus', foreignKey: 'statusId', otherKey: 'callId'});
+db.Call.belongsToMany(db.Status, { through: 'callStatus', foreignKey: 'callId', otherKey: 'statusId', as: 'Status'});
 
 db.Call.belongsTo(db.Team, {as: 'creator'});
 db.Team.hasMany(db.Call, {foreignKey: 'creatorId', as: 'yourCalls'});

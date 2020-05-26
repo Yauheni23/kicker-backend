@@ -6,10 +6,12 @@ class TeamMapper {
       image: team.image,
       users: team.users.map(TeamMapper.mapDatabaseUsers),
       captainId: team.captainId,
+      yourCalls: team.yourCalls,
+      calls: team.calls,
       games: team.games.map(game => ({
         id: game.id,
         date: game.date,
-        goals: game.teamGame.goals
+        goals: game.teamGames.goals
       })),
     };
   }

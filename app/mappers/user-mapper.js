@@ -9,7 +9,7 @@ class UserMapper {
       games: user.games.map(game => ({
         id: game.id,
         date: game.date,
-        goals: game.gameUser.goals
+        goals: game.gameUsers.goals || 0
       }))
     };
   }

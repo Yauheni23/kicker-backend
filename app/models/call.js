@@ -5,18 +5,13 @@ module.exports = (sequelize, Sequelize) => {
         date: {
             type: Sequelize.DATE,
         },
-        createdTeamId: {
-            type: Sequelize.INTEGER,
-        },
-        opponentTeamId: {
-            type: Sequelize.INTEGER,
-        },
-        createdTeamConfirmed: {
-            type: Sequelize.INTEGER,
-        },
-        opponentTeamConfirmed: {
+        creatorConfirmed: {
             type: Sequelize.BOOLEAN,
-            defaultValue: false,
+            defaultValue: true
+        },
+        opponentConfirmed: {
+            type: Sequelize.BOOLEAN,
+            defaultValue: false
         }
     });
 };

@@ -9,20 +9,20 @@ class GameMapper {
                 id: game.teams[0].id,
                 name: game.teams[0].name,
                 image: game.teams[0].image,
-                goals: game.teams[0].teamGame.goals,
-                players: game.players.filter(player => game.teams[0].id === player.gameUser.teamId)
+                goals: game.teams[0].teamGames.goals,
+                players: game.players.filter(player => game.teams[0].id === player.gameUsers.teamId)
                     .map(player => ({
-                        id: player.id, name: player.name, image: player.image, goals: player.gameUser.goals
+                        id: player.id, name: player.name, image: player.image, goals: player.gameUsers.goals
                     }))
             },
             team2: {
                 id: game.teams[1].id,
                 name: game.teams[1].name,
                 image: game.teams[1].image,
-                goals: game.teams[1].teamGame.goals,
-                players: game.players.filter(player => game.teams[1].id === player.gameUser.teamId)
+                goals: game.teams[1].teamGames.goals,
+                players: game.players.filter(player => game.teams[1].id === player.gameUsers.teamId)
                     .map(player => ({
-                        id: player.id, name: player.name, image: player.image, goals: player.gameUser.goals
+                        id: player.id, name: player.name, image: player.image, goals: player.gameUsers.goals
                     }))
             }
         };

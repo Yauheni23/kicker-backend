@@ -1,10 +1,10 @@
 const {Call} = require('../db/db.config.js');
 
 const defaultOptions = {
-  include: ['statuses', {
-    association: 'games'
-  }],
-  attributes: ['id', 'name', 'image', 'mail', 'password']
+  include: [
+    {association: 'Status', attributes: ['name']}, {
+    association: 'creator'
+  }, { association: 'opponent'}]
 };
 
 class CallRepository {
@@ -15,21 +15,16 @@ class CallRepository {
     });
   }
 
-  getById(id) {
-    return Call.findOne({
-      where: {
-        id
-      },
-      ...defaultOptions
-    });
-  }
-
   create(data) {
-    return User.create(data);
+    return Call.create(data);
   }
 
   update(data, options) {
     return Call.update(data, options);
+  }
+
+  destroy(options) {
+    return Call.destroy(options);
   }
 }
 

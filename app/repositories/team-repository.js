@@ -4,6 +4,12 @@ const defaultOptions = {
   include: [
     {association: 'users', attributes: ['id', 'name', 'image']},
     {association: 'games', attributes: ['id', 'date']},
+    {association: 'yourCalls', attributes: ['id', 'date', 'creatorConfirmed', 'opponentConfirmed', 'creatorId', 'opponentId'], include: {
+      association: 'Status'
+      }},
+    {association: 'calls', attributes: ['id', 'date', 'creatorConfirmed', 'opponentConfirmed', 'creatorId', 'opponentId'], include: {
+      association: 'Status'
+      }},
   ],
   attributes: ['id', 'name', 'image', 'captainId'],
 };
